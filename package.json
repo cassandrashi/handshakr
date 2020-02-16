@@ -1,0 +1,22 @@
+{
+  "name": "handshakr",
+  "version": "0.0.1",
+  "description": "Handshake airdrop helper",
+  "dependencies": {
+    "bcrypto": "~5.0.0",
+    "bfile": "~0.2.1",
+    "boxen": "^4.2.0",
+    "brq": "~0.1.8",
+    "bsert": "~0.0.10",
+    "bufio": "~1.0.6",
+    "chalk": "^3.0.0",
+    "clear": "^0.1.0",
+    "goosig": "~0.6.0",
+    "inquirer": "^7.0.4",
+    "listr": "^0.14.3",
+    "listr-inquirer": "^0.1.0"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
