@@ -1,3 +1,8 @@
+/*
+* Copyright ©2020 handshake.moe
+* All rights reserved
+*/
+
 const boxen = require('boxen');
 const chalk = require('chalk');
 const clear = require('clear');

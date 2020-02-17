@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Copyright ©2020 handshake.moe
+# All rights reserved
+
 echo '-- Checking for required tools...'
 
 HAS_GIT=$(which git)
