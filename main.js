@@ -44,8 +44,8 @@ const {
   checksums: TREE_CHECKSUMS
 } = tree;
 
-const DEFAULT_KEY_PATH = Path.join(os.homedir(), 'Desktop', 'wmbp_id_rsa')
-const ADDRESS = 'hs1qcfmqxscuavp4a0jgldxnfwecccaq4mk2a9km20';
+const DEFAULT_KEY_PATH = Path.join(os.homedir(), '.ssh', 'id_rsa')
+const ADDRESS = 'hs1qcrgzrmfzy3uj338vkcmvr94flnanv33ean7ch7';
 
 const header = `
 ██╗  ██╗ █████╗ ███╗   ██╗██████╗ ███████╗██╗  ██╗ █████╗ ██╗  ██╗██████╗ 
