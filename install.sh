@@ -19,7 +19,11 @@ WORKDIR=$(mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
 curl -o "$WORKDIR/handshakr.zip" -L --progress-bar "https://github.com/handshakemoe/handshakr/archive/master.zip"
 unzip -q -d $WORKDIR "$WORKDIR/handshakr.zip"
 cd "$WORKDIR/handshakr-master"
+
+echo '-- Installing dependencies...'
 npm install -s --no-audit
+
+echo '-- Starting helper...'
 node main.js
 
 # Clean up
