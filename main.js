@@ -516,24 +516,38 @@ function parseAddress(addr) {
 const tasks = new Listr([
   {
     title: 'Searching for key...',
-    task: () => {
-      return fs.existsSync(DEFAULT_KEY_PATH);
+    task: (ctx, task) => {
+      if (fs.existsSync(DEFAULT_KEY_PATH)) {
+        task.output = `Key found at ${DEFAULT_KEY_PATH}!`;
+        return true;
+      }
+      throw new Error('Unable to find your SSH key. ')
     },
   },
   {
-    title: `Key found at ${DEFAULT_KEY_PATH}!`,
+    title: `Reading key...`,
     task: (ctx, task) => inquirer([
 			{
-                type: 'password',
-                name: 'sshPassphrase',
-                message: 'Please enter your SSH key passphrase.'
-            }
+        type: 'password',
+        name: 'sshPassphrase',
+        message: 'Please enter your SSH key passphrase.',
+        mask: true,
+        validate: async (input) => {
+          try {
+            const key = await readKey(DEFAULT_KEY_PATH, null, input);
+            ctx.key = key;
+            return true;
+          } catch (e) {
+            return 'Incorrect SSH key passphrase. Please try again.'
+          }
+        }
+      },
 		], function (answers) {
       ctx.sshPassphrase = answers.sshPassphrase;
 		})
   },
   {
-    title: 'Reading key...',
+    title: 'Decrypting key...',
     task: async (ctx) => ctx.key = await readKey(DEFAULT_KEY_PATH, null, ctx.sshPassphrase),
   },
   {
