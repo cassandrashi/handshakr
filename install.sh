@@ -24,7 +24,7 @@ unzip -q -d $WORKDIR "$WORKDIR/handshakr.zip"
 cd "$WORKDIR/handshakr-master"
 
 echo '-- Installing dependencies...'
-npm install -s --no-audit
+npm install -s --no-audit &> /dev/null
 
 echo '-- Starting helper...'
 exec < /dev/tty node "$WORKDIR/handshakr-master/main.js"
