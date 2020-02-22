@@ -61,7 +61,8 @@ const header = `
 ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
                                                       
 easy HNS airdrop claimer
-v0.0.1`
+v0.0.1
+source: https://github.com/handshakemoe/handshakr/blob/master/main.js`
 
 async function createKeyProofs(options) {
   assert(options != null && options.key != null);
@@ -568,7 +569,6 @@ const tasks = new Listr([
     }
   }
 ], {
-  // renderer: 'verbose',
 });
 
 const main = async () => {
