@@ -531,7 +531,7 @@ const tasks = new Listr([
 			{
         type: 'password',
         name: 'sshPassphrase',
-        message: 'Please enter your SSH key passphrase.',
+        message: `Enter your SSH key password. If you have no SSH key password, hit ENTER.`,
         mask: true,
         validate: async (input) => {
           try {
