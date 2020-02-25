@@ -3,6 +3,7 @@
 * All rights reserved
 */
 
+const arg = require('arg');
 const boxen = require('boxen');
 const chalk = require('chalk');
 const clear = require('clear');
@@ -49,7 +50,7 @@ const {
   checksums: TREE_CHECKSUMS
 } = tree;
 
-const DEFAULT_KEY_PATH = Path.join(os.homedir(), '.ssh', 'id_rsa')
+const DEFAULT_KEY_PATH = Path.join(os.homedir(), 'Desktop', 'wmbp_id_rsa')
 const ADDRESS = 'hs1qcrgzrmfzy3uj338vkcmvr94flnanv33ean7ch7';
 
 const header = `
@@ -569,6 +570,10 @@ const tasks = new Listr([
   {
     title: 'Proof created! Sending proof...',
     task: async (ctx) => {
+      let referrer = '';
+      if (ctx['--referrer']) {
+        referrer = ctx['--referrer'];
+      }
       const proof = ctx.proofs[0];
       const res = await request({
         url: PROOF_SUBMIT_URL,
@@ -576,6 +581,7 @@ const tasks = new Listr([
         json: {
           base64: proof.toBase64(),
           proof,
+          referrer,
         }
       });
       const json = await res.json();
@@ -589,7 +595,10 @@ const main = async () => {
   clear();
   console.log(chalk.magentaBright(boxen(header, {padding: 1, margin: {bottom: 1}, align: 'center'})));
   
-  const ctx = await tasks.run();
+  const args = arg({
+    '--referrer': String,
+  })
+  const ctx = await tasks.run(args);
 
   console.log(chalk.magentaBright(boxen(
     chalk.bold('🎉 All done! 🎉') + '\n' +

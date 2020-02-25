@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Handshake airdrop helper",
   "dependencies": {
+    "arg": "^4.1.3",
     "bcrypto": "~5.0.0",
     "bfile": "~0.2.1",
     "boxen": "^4.2.0",

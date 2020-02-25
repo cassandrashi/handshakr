@@ -27,8 +27,8 @@ echo '-- Installing dependencies...'
 npm install -s --no-audit &> /dev/null
 
 echo '-- Starting helper...'
-exec < /dev/tty node "$WORKDIR/handshakr-master/main.js"
+exec < /dev/tty node "$WORKDIR/handshakr-master/main.js" "$@"
 
 # Clean up
-rm -r $WORKDIR
+# rm -r $WORKDIR
 exit 0
