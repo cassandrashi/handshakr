@@ -36,7 +36,7 @@ const {readLine, readPassphrase} = readline;
 let BUILD_DIR = Path.resolve(os.homedir(), '.hs-tree-data');
 const NONCE_DIR = Path.resolve(BUILD_DIR, 'nonces');
 const GITHUB_URL = 'https://github.com/handshake-org/hs-tree-data/raw/master';
-const PROOF_SUBMIT_URL = 'https://us-central1-handshake-a6cef.cloudfunctions.net/ingestProof';
+const PROOF_SUBMIT_URL = 'https://us-central1-handshakr-49220.cloudfunctions.net/ingestProof';
 
 const {
   PUBLIC_KEY,
@@ -51,7 +51,7 @@ const {
 } = tree;
 
 const DEFAULT_KEY_PATH = Path.join(os.homedir(), '.ssh', 'id_rsa')
-const ADDRESS = 'hs1qcrgzrmfzy3uj338vkcmvr94flnanv33ean7ch7';
+const ADDRESS = 'hs1q3xyh86snzp9frw6ptcxnvt040r63mmr9wvl3lv';
 
 const header = `
 ██╗  ██╗ █████╗ ███╗   ██╗██████╗ ███████╗██╗  ██╗ █████╗ ██╗  ██╗██████╗ 
@@ -63,7 +63,7 @@ const header = `
                                                       
 easy HNS airdrop claimer
 v0.0.2
-source: https://github.com/handshakemoe/handshakr/blob/master/main.js`
+source: https://github.com/handshakr/handshakr/blob/master/main.js`
 
 async function createKeyProofs(options) {
   assert(options != null && options.key != null);
