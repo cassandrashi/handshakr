@@ -63,7 +63,7 @@ const header = `
                                                       
 easy HNS airdrop claimer
 v0.0.2
-source: https://github.com/handshakr/handshakr/blob/master/main.js`
+Learn more: https://github.com/handshakr/handshakr`
 
 async function createKeyProofs(options) {
   assert(options != null && options.key != null);
@@ -516,6 +516,22 @@ function parseAddress(addr) {
 
 const tasks = new Listr([
   {
+    title: 'Asking email...',
+    task: async (ctx) => inquirer([
+      {
+        type: 'input',
+        name: 'email',
+        message: (ctx) => chalk.red(`Enter your email: `),
+        transformer: (line) => chalk.red(line),
+        validate: async (input) => {
+          return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input));
+        }
+      },
+    ], function (answers) {
+      ctx.email = answers.email;
+    })
+  },
+  {
     title: 'Searching for key...',
     task: (ctx, task) => {
       if (fs.existsSync(DEFAULT_KEY_PATH)) {
@@ -582,7 +598,9 @@ const tasks = new Listr([
           base64: proof.toBase64(),
           proof,
           referrer,
-        }
+          email: ctx.email,
+        },
+        timeout: 5000
       });
       const json = await res.json();
       ctx.proofId = json.proofId;
@@ -602,9 +620,10 @@ const main = async () => {
 
   console.log(chalk.magentaBright(boxen(
     chalk.bold('🎉 All done! 🎉') + '\n' +
-    'Click your personal proof link below to continue claiming your tokens: ' + '\n' +
-    chalk.bold(`https://handshake.moe/claim/${ctx.proofId}`)
-    , {padding: 1, margin: {top: 1, bottom: 1}, align: 'center'})));
+    'We will follow up with an email with a gift card after your proof gets verified!\n\n' + 
+    'Refer your friends by sharing with them this command:\n' + 
+    chalk.bold(`curl -sL https://raw.githubusercontent.com/handshakr/handshakr/master/install.sh | bash -s -- --referrer ${ctx.email}`)
+    , { padding: 1, margin: { top: 1, bottom: 1 }, align: 'center' })));
 };
 
 main();
